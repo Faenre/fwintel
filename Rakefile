@@ -13,22 +13,18 @@ task :reseed do
   require 'http'
   require 'json'
 
-  CACHE_FILE = 'ids.json'
+  ID_CACHE_FILE = 'ids.json'
   ESI_BASE = 'https://esi.evetech.net/latest'
-  FACTIONS = ESI_BASE + '/universe/factions/'
   FW = ESI_BASE + '/fw/systems/'
   NAMES = ESI_BASE + '/universe/names/'
 
-  factions = HTTP.get(FACTIONS).parse.map do |info|
-    [info['faction_id'].to_i, info['name']]
+  fw_system_ids = HTTP.get(FW).parse.map { |info| info['solar_system_id'] }
+
+  ids_with_names = HTTP.post(NAMES, json: fw_system_ids).parse.map do |info|
+    [info['id'], info['name']]
   end.to_h
 
-  systems = HTTP.get(FW).parse.map { |info| info['solar_system_id'] }
-  systems = HTTP.post(NAMES, json: systems).parse.map do |info|
-    [info['id'].to_i, info['name']]
-  end.to_h
-
-  File.open(CACHE_FILE, 'w') { |f| f.write JSON.dump(systems.merge(factions)) }
+  File.open(ID_CACHE_FILE, 'w') { |f| f.write JSON.dump(ids_with_names) }
 end
 
 desc 'Test for deleted webhooks'
