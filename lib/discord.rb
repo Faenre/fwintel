@@ -1,0 +1,2 @@
+class DiscordHandler
+end
