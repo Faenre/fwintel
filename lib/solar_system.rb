@@ -8,6 +8,8 @@ class SolarSystem
 
   def to_s; end
 
+  def to_json; end
+
   def pct; end
 
   def plexes; end

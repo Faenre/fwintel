@@ -54,6 +54,15 @@ class SolarSystemTest < MiniTest::Test
     assert_equal('Tzvi', @system.to_s)
   end
 
+  def test_to_json
+    answer = ''.concat(
+      '{"contested":"contested","occupier_faction_id":500003,',
+      '"owner_faction_id":500003,"solar_system_id":30002957,',
+      '"victory_points":500,"victory_points_threshold":3000}'
+    )
+    assert_equal answer, @system.to_json
+  end
+
   def test_score_returns_system_score
     assert_instance_of(SystemScore, @system.score)
   end
