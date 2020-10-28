@@ -6,8 +6,6 @@ class SolarSystem
 
   def to_i; end
 
-  def to_s; end
-
   def to_json; end
 
   def pct; end

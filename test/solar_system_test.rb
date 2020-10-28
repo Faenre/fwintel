@@ -50,10 +50,6 @@ class SolarSystemTest < MiniTest::Test
   end
   # rubocop:enable Style/NumericLiterals
 
-  def test_to_s
-    assert_equal('Tzvi', @system.to_s)
-  end
-
   def test_to_json
     answer = ''.concat(
       '{"contested":"contested","occupier_faction_id":500003,',
