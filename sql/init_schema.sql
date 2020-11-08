@@ -1,6 +1,7 @@
 CREATE TABLE eve_universe (
   id integer UNIQUE NOT NULL,
   name varchar(50) NOT NULL,
+  type varchar(16)
 
   PRIMARY KEY (id)
 );
@@ -28,7 +29,7 @@ CREATE TABLE fw_system_statuses (
   response_id integer NOT NULL,
   system_id integer NOT NULL,
   vp_current integer NOT NULL,
-  vp_max integer NOT NULL DEFAULT 300,
+  vp_max integer NOT NULL DEFAULT 3000,
   owning_faction integer NOT NULL,
 
   PRIMARY KEY (id),
