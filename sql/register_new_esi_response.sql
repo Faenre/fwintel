@@ -1,7 +1,3 @@
-INSERT INTO esi_responses
-  (endpoint_id, response_code)
-VALUES (%{id}, %{response}) ;
-
-SELECT id FROM esi_responses
-ORDER BY id DESC
-LIMIT 1;
+   INSERT INTO esi_responses (code)
+   VALUES (%s)
+RETURNING id;
