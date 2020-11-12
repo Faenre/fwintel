@@ -1,2 +1,1 @@
-class DiscordHandler
-end
+discord.rb
