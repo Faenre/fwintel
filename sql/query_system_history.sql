@@ -8,4 +8,4 @@ SELECT f.solar_system_id,
                  WHERE r.code BETWEEN 200 AND 399
                  GROUP BY r.last_modified
                  ORDER BY r.id DESC
-                 LIMIT %s);
+                 LIMIT %{size});
