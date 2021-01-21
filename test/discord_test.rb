@@ -4,7 +4,7 @@ require 'simplecov'
 SimpleCov.start
 require 'minitest/autorun'
 
-require './lib/discord'
+# require './lib/discord'
 
 class DiscordHandlerTest < MiniTest::Test
   def setup; end
