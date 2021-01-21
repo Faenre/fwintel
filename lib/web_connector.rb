@@ -1,4 +1,4 @@
-require "./lib/external/#{ENV['HTTP_ADAPTER'] || 'httpgem'}"
+require './lib/external/http'
 
 # Passes requests into the correct adapter module.
 class WebConnector
