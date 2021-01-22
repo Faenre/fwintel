@@ -15,7 +15,7 @@ class HTTPGemAdapterTest < Minitest::Test
 More information...</a>"
 
   def setup
-    @request = Request.new(*EXAMPLE_REQUEST)
+    @request = WebRequest.new(*EXAMPLE_REQUEST)
     @response = HttpAdapter.request_single(@request)
   end
 
