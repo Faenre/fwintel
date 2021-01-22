@@ -1,4 +1,4 @@
-require './lib/external/http'
+require './lib/external/http_gem_interface'
 
 # Passes requests into the correct adapter module.
 class WebConnector
@@ -16,21 +16,5 @@ class WebConnector
 
   def retrieve_request_responses
     HTTPAdapter.request_several(@queue)
-  end
-end
-
-# Describes the request structure
-class Request
-  attr_reader :http_method, :host, :resource, :contents
-
-  def initialize(http_method, host, resource, **content)
-    @http_method = http_method
-    @host = host
-    @resource = resource
-    @contents = content
-  end
-
-  def url
-    @host + @resource
   end
 end

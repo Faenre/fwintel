@@ -5,21 +5,21 @@ require './lib/web_response'
 
 class HttpAdapter
   def self.request_single(request)
-    HttpResponse(HTTP.send(
-                   request.http_method,
-                   request.url,
-                   brequest.content
-                 ))
+    HttpResponse.new(HTTP.send(
+                       request.http_method,
+                       request.url,
+                       request.content
+                     ))
   end
 
   def self.request_several(requests)
     HTTP.persistent requests.first.host do |http|
       requests.map do |request|
-        HttpResponse(http.send(
-                       request.http_method,
-                       request.resource,
-                       request.content
-                     ))
+        HttpResponse.new(http.send(
+                           request.http_method,
+                           request.resource,
+                           request.content
+                         ))
       end
     end
   end
