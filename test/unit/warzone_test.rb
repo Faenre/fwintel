@@ -8,7 +8,7 @@ require 'json'
 
 require './lib/warzone'
 
-SAMPLE_FILE = './test/sample_response.json'.freeze
+SAMPLE_FILE = './test/data/sample_response.json'.freeze
 SAMPLE_CONTENT = JSON.parse(File.open(SAMPLE_FILE).read).freeze
 
 # Test the warzone creation suite
@@ -17,16 +17,24 @@ class WarzoneFactoryTest < MiniTest::Test
   def teardown; end
 
   def test_from_esi
-    skip
+    warzone_mock = MiniTest::Mock.new
 
-    sample_response = MockHTTP.new
-    WarzoneFactory.from_esi(sample_response)
+    Warzone.stub :new, warzone_mock do
+      warzone_mock.expect :new, true
+
+      assert WarzoneFactory.from_json(SAMPLE_CONTENT)
+    end
   end
 
   def test_from_json
-    skip
+    warzone_mock = MiniTest::Mock.new
+    response_mock = WebResponseMock.new(JSON.dump(SAMPLE_CONTENT))
 
-    WarzoneFactory.from_json(SAMPLE_CONTENT)
+    Warzone.stub :new, warzone_mock do
+      warzone_mock.expect :new, true
+
+      assert WarzoneFactory.from_web(response_mock)
+    end
   end
 end
 
@@ -70,4 +78,12 @@ class WarzoneDeltaTest < MiniTest::Test
   def setup; end
 
   def teardown; end
+end
+
+class WebResponseMock
+  attr_accessor :body
+
+  def initialize(body)
+    @body = body
+  end
 end
